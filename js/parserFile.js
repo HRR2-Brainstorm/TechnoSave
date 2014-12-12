@@ -6,15 +6,17 @@ var walmart = {
   makeUrl: function(item) {
     return 'http://api.walmartlabs.com/v1/search' + '?apiKey=4z8pkk2ycuvewyydr4mf3ha5&query=' + item;
   },
-  parser: 'items'
+  parser: 'items',
+  productUrl: 'productUrl'
 };
 
 var bestbuy = {
   name: 'BestBuy',
   makeUrl: function(item) {
-    return 'http://api.remix.bestbuy.com/v1/products' + '(name=' + item + '*)?show=name,salePrice,upc&format=json' + '&apiKey=3fywvy298naxeed665ex82z5';
+    return 'http://api.remix.bestbuy.com/v1/products' + '(name=' + item + '*)?show=name,salePrice,upc,mobileUrl&format=json' + '&apiKey=3fywvy298naxeed665ex82z5';
   },
-  parser: 'products'
+  parser: 'products',
+  productUrl: 'mobileUrl'
 };
 
 var stores = [walmart, bestbuy];
@@ -31,7 +33,8 @@ module.exports = {
         output.push(api({
           getURL: stores[j].makeUrl(itemsList[i]),
           store: stores[j].name,
-          parser: stores[j].parser
+          parser: stores[j].parser,
+          productUrl: stores[j].productUrl
         }));
       }
     }

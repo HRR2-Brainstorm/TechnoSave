@@ -218,12 +218,15 @@ angular.module('App', ['ui.router'])
 
     if (mostRecent[1] !== collection){
 
-        for (var i in collection){
-          if (collection.hasOwnProperty(i)){
-            collection[i].__arrayify__ = i;
-            result.push(collection[i]);
-          }
+      for (var i in collection){
+
+        if (collection.hasOwnProperty(i)){
+
+          collection[i].__arrayify__ = i;
+
+          result.push(collection[i]);
         }
+      }
 
       mostRecent = [result, collection];
 
