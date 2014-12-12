@@ -27,8 +27,6 @@
 - Node 0.10.x
 - Redis 2.6.x
 - Postgresql 9.1.x
-- etc
-- etc
 
 ## Development
 
@@ -41,6 +39,14 @@ sudo npm install -g bower
 npm install
 bower install
 ```
+
+### Compiling Stylesheets
+
+To compile the LESS-based stylesheets first install [Grunt](http://getbootstrap.com/getting-started/#grunt)
+
+The compile the stylesheets:
+
+```grunt```
 
 ### Roadmap
 
