@@ -1,6 +1,8 @@
 node_modules/
 bower_components/
 *.log
-
 build/
 dist/
+.floo
+.flooignore
+.DS_Store
