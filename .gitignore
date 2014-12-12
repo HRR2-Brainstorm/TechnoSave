@@ -6,3 +6,4 @@ dist/
 .floo
 .flooignore
 .DS_Store
+public/stylesheets/styles.css
