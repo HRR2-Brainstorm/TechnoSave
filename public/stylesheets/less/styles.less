@@ -1,0 +1,23 @@
+@import "../../bower_components/bootstrap/less/bootstrap.less";
+
+body {
+  background-color:@body-bg;
+}
+
+div.container {
+
+  margin-top: @navbar-height + 30;
+
+  > div {
+
+    .make-row();
+
+    > div {
+
+      .make-sm-column(12);
+
+    }
+
+  }
+
+}
