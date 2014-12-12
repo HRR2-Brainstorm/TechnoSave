@@ -22,14 +22,6 @@ angular.module('App', ['ui.router'])
 //*****  ItemList controller ******//
 .controller('ItemListCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
-  //*****  main page animation ******//
-  var animate = function(){
-    $('#form').animate({
-      marginTop: "-8%"
-
-    }, 1000 );
-  };
-
   var animateSummary = function(){
     $('.summaryTable').animate({
       marginRight: "60%",
@@ -42,7 +34,6 @@ angular.module('App', ['ui.router'])
   $scope.addItem = function() {
     $http.post('/', {items: $scope.inputModel})
       .success(function(data){
-        animate();
         if(data.length === 0){
           $scope.empty = true;
           $scope.items = undefined;
@@ -70,7 +61,7 @@ angular.module('App', ['ui.router'])
   $scope.getItemId = function (name, price, store) {
     $scope.cart = $scope.cart || [];
     var item = {
-                  name: name,
+                 name: name,
                   price: price,
                   store: store
                 }
@@ -94,7 +85,7 @@ angular.module('App', ['ui.router'])
     animateSummary();
     $scope.compare =  $scope.compare || [];
     var item = {
-                  name: name,
+                 name: name,
                   price: price,
                   store: store
                 }
