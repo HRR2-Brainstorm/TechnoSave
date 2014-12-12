@@ -21,12 +21,12 @@ angular.module('App', ['ui.router'])
 
 //*****  ItemList controller ******//
 .controller('ItemListCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
-  
+
   //*****  main page animation ******//
   var animate = function(){
     $('#form').animate({
       marginTop: "-8%"
-      
+
     }, 1000 );
   };
 
@@ -41,7 +41,7 @@ angular.module('App', ['ui.router'])
   //*****  post and get from API ******//
   $scope.addItem = function() {
     $http.post('/', {items: $scope.inputModel})
-      .success(function(data){ 
+      .success(function(data){
         animate();
         if(data.length === 0){
           $scope.empty = true;
@@ -63,19 +63,19 @@ angular.module('App', ['ui.router'])
     for (var i = 0; i < $scope.cart.length; i++) {
       sum += $scope.cart[i].price;
       $scope.total = sum;
-    } 
+    }
   };
 
   //*****  Summary Table ******//
   $scope.getItemId = function (name, price, store) {
     $scope.cart = $scope.cart || [];
-    var item = { 
+    var item = {
                   name: name,
                   price: price,
                   store: store
                 }
     $scope.cart.push(item);
-    $scope.calculateSum(); 
+    $scope.calculateSum();
   };
 
   //they clicked the map button in shopping list
@@ -85,7 +85,7 @@ angular.module('App', ['ui.router'])
   // clear one item at a time
   $scope.clearItem = function(index){
     $scope.cart.splice(index, 1);
-    $scope.calculateSum(); 
+    $scope.calculateSum();
   };
 
   //*****  Compare Table ******//
@@ -93,7 +93,7 @@ angular.module('App', ['ui.router'])
   $scope.moveToCompare = function(name, price, store) {
     animateSummary();
     $scope.compare =  $scope.compare || [];
-    var item = { 
+    var item = {
                   name: name,
                   price: price,
                   store: store
@@ -114,8 +114,53 @@ angular.module('App', ['ui.router'])
   }
 }])
 
+.filter('groupBy', function () {
+
+  var memoizer = {};
+
+  return function (collection, property) {
+
+    var result = {};
+    var prop;
+
+    memoizer[property] = memoizer[property] || [];
+
+    if (memoizer[property][1] !== collection){
+
+      var checkElm = function(elm) {
+        prop = elm[property];
+
+        if(!result[prop]) {
+          result[prop] = [];
+        }
+        result[prop].push(elm);
+      };
+
+      if (Array.isArray(collection)){
+        for (var i = 0; i < collection.length; i++){
+          checkElm(collection[i]);
+        }
+      } else {
+        for (var item in collection){
+          if (collection.hasOwnProperty(item)){
+            checkElm(collection[item]);
+          }
+        }
+      }
+
+      memoizer[property] = [result, collection];
+
+    }
+
+
+    return memoizer[property][0];
+
+  };
+
+})
+
 //*****  Map Controller ******//
-.controller('MapCtrl', ['$scope', '$http', function ($scope, $http) { 
+.controller('MapCtrl', ['$scope', '$http', function ($scope, $http) {
   //get location data, start render cascade
   var map;
   var infowindow;
