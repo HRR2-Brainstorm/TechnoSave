@@ -5,4 +5,9 @@ build/
 dist/
 .floo
 .flooignore
+<<<<<<< HEAD
 .DS_Store
+=======
+.DS_Store
+public/.DS_Store
+>>>>>>> Cleanup of .gitignore.
