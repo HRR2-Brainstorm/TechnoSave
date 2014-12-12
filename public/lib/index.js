@@ -111,7 +111,15 @@ angular.module('App', ['ui.router'])
   $scope.clear = function() {
     $scope.compare = [];
     $scope.diff = [];
-  }
+  };
+
+  // order by after grouping by upc
+  $scope.grouping = 'upc';
+
+  $scope.arrayifyKey = function(group) {
+    return group.__arrayify__;
+  };
+
 }])
 
 .filter('groupBy', function () {
@@ -152,8 +160,37 @@ angular.module('App', ['ui.router'])
 
     }
 
-
     return memoizer[property][0];
+
+  };
+
+})
+
+.filter('arrayify', function () {
+
+  var mostRecent = [];
+
+  return function (collection) {
+
+    var result = [];
+    var prop;
+
+    if (mostRecent[1] !== collection){
+
+      if (!Array.isArray(collection)){
+        for (var i in collection){
+          if (collection.hasOwnProperty(i)){
+            collection[i].__arrayify__ = i;
+            result.push(collection[i]);
+          }
+        }
+      }
+
+      mostRecent = [result, collection];
+
+    }
+
+    return mostRecent[0];
 
   };
 

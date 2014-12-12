@@ -25,7 +25,15 @@
   </div> <!-- /#form -->
 
     <!-- Listing results back from the API -->
-  <input type="text" ng-model="search">
+  <div class="filter-tools">
+    <form name="groupByForm">
+      <label for="groupByForm">Group Products By</label>
+      <input type="radio" ng-model="grouping" value="store"> Store <br/>
+      <input type="radio" ng-model="grouping" value="upc"> Universal Product Code <br/>
+   </form>
+
+    <input type="text" ng-model="search">
+  </div>
   <div class="resultTable">
     <div class="table table-hover resultTable" ng-show="items">
       <div>
@@ -36,7 +44,7 @@
         </div>
       </div>
       <div>
-        <div ng-repeat="(upc, value) in items | groupBy: 'upc'" id="list">
+        <div style="border: 1px solid black;" ng-repeat="(key, value) in items | groupBy: grouping | arrayify | orderBy:arrayifyKey" id="list">
           <div ng-repeat="item in value | orderBy: 'price' | filter: search">
             <div><button class="btn btn-success cartBtn" ng-click="getItemId(item.name, item.price, item.store)">Add To Summary</button></div>
             <div>{{item.name}}</div>
