@@ -44,9 +44,11 @@ bower install
 
 To compile the LESS-based stylesheets first install [Grunt](http://getbootstrap.com/getting-started/#grunt)
 
-The compile the stylesheets:
+Then compile the stylesheets:
 
 ```grunt```
+
+This will create a `styles.css` file at `/public/stylesheets/styles.css` with the compiled CSS.
 
 ### Roadmap
 
