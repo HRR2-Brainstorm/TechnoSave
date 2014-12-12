@@ -61,10 +61,10 @@ angular.module('App', ['ui.router'])
   $scope.getItemId = function (name, price, store) {
     $scope.cart = $scope.cart || [];
     var item = {
-                  name: name,
-                  price: price,
-                  store: store
-                }
+      name: name,
+      price: price,
+      store: store
+    }
     $scope.cart.push(item);
     $scope.calculateSum();
   };
