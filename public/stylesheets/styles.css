@@ -6023,6 +6023,8 @@ button.close {
 .modal-footer:after,
 div.container > div:before,
 div.container > div:after,
+div.container #form:before,
+div.container #form:after,
 div.container .resultTable > div:first-child:before,
 div.container .resultTable > div:first-child:after,
 div.container .resultTable > div:not(:first-child):before,
@@ -6046,6 +6048,7 @@ div.container .resultTable > div:not(:first-child):after {
 .panel-body:after,
 .modal-footer:after,
 div.container > div:after,
+div.container #form:after,
 div.container .resultTable > div:first-child:after,
 div.container .resultTable > div:not(:first-child):after {
   clear: both;
@@ -6314,6 +6317,11 @@ div.container > div > div {
     width: 100%;
   }
 }
+div.container #form {
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-bottom: 2em;
+}
 div.container .resultTable > div > div:first-child {
   float: left;
   width: 100%;
@@ -6394,4 +6402,9 @@ div.container .resultTable > div:not(:first-child) {
 }
 div.container .resultTable > div:not(:first-child):nth-child(odd) {
   background-color: #f2f2f2;
+}
+div.container .resultTable > div:not(:first-child) button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
