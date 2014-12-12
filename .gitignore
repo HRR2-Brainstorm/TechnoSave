@@ -5,4 +5,6 @@ build/
 dist/
 .floo
 .flooignore
+.DS_Store.floo
+.flooignore
 public/.DS_Store
