@@ -14,17 +14,35 @@
       <div class="col-md-12">
         <div class="error alert-danger"></div>
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" placeholder="Search" ng-model="inputModel">
+          <input type="search" class="form-control" placeholder="Search" ng-model="inputModel">
           <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary search">Start Saving!</button>
+            <button class="btn btn-primary search" type="button">Start Saving!</button>
           </span>
-          <div class="clearfix"></div>
         </div>
+
       </div>
     </form>
   </div> <!-- /#form -->
 
   <div class="filter-tools">
+
+    <div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-addon form-control">Group By</span>
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div><!-- /btn-group -->
+    </div>
+  </div>
+</div>
 
     <form name="groupByForm">
       <label for="groupByForm">Group Products By</label> <br/>
