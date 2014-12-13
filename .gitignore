@@ -4,6 +4,7 @@ bower_components/
 
 build/
 dist/
+public/stylesheets/styles.css
 .floo
 .flooignore
 .DS_Store
