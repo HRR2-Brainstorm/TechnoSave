@@ -20,6 +20,7 @@ module.exports = function (req) {
           apiItem.upc = itemObj.upc;
           apiItem.name = itemObj.name;
           apiItem.store = req.store;
+          apiItem.productUrl = itemObj[req.productUrl];
 
           //store item info obj (that is a possible match) into the output
           apiItemsList.push(apiItem);

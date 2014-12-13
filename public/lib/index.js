@@ -111,7 +111,19 @@ angular.module('App', ['ui.router'])
   $scope.clear = function() {
     $scope.compare = [];
     $scope.diff = [];
-  }
+  };
+
+  // order by after grouping by upc
+  $scope.price = ['price', 'name', 'store'];
+  $scope.name = ['name', 'price', 'store'];
+  $scope.sotre = ['store', 'name', 'price'];
+  $scope.ordering = $scope.price;
+  $scope.grouping = 'upc';
+
+  $scope.arrayifyKey = function(group) {
+    return group.__arrayify__;
+  };
+
 }])
 
 .filter('groupBy', function () {
@@ -152,8 +164,75 @@ angular.module('App', ['ui.router'])
 
     }
 
-
     return memoizer[property][0];
+
+  };
+
+})
+
+.filter('filterGroups', ['$filter', function ($filter) {
+
+  var memoizer = {};
+
+  return function (groups, filter) {
+
+    var result = {};
+    var prop;
+
+    if (!filter) return groups;
+
+    memoizer[filter] = memoizer[filter] || [];
+
+    if (memoizer[filter][1] !== groups){
+
+      for (var key in groups){
+        if (groups.hasOwnProperty(key)){
+
+          var filteredGroup = $filter('filter')(groups[key], filter);
+
+          if (filteredGroup.length) result[key] = filteredGroup;
+
+        }
+      }
+
+      memoizer[filter] = [result, groups];
+
+    }
+
+    return memoizer[filter][0];
+
+  };
+
+}])
+
+.filter('arrayify', function () {
+
+  var mostRecent = [];
+
+  return function (collection) {
+
+    var result = [];
+    var prop;
+
+    if (Array.isArray(collection)) return collection;
+
+    if (mostRecent[1] !== collection){
+
+      for (var i in collection){
+
+        if (collection.hasOwnProperty(i)){
+
+          collection[i].__arrayify__ = i;
+
+          result.push(collection[i]);
+        }
+      }
+
+      mostRecent = [result, collection];
+
+    }
+
+    return mostRecent[0];
 
   };
 
