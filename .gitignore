@@ -1,9 +1,9 @@
 node_modules/
 bower_components/
 *.log
+
 build/
 dist/
+public/stylesheets/styles.css
 .floo
 .flooignore
-.DS_Store
-public/stylesheets/styles.css
