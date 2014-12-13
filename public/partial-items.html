@@ -14,34 +14,80 @@
       <div class="col-md-12">
         <div class="error alert-danger"></div>
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" placeholder="Search" ng-model="inputModel">
+          <input type="search" class="form-control" placeholder="Search" ng-model="inputModel">
           <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary search">Start Saving!</button>
+            <button class="btn btn-primary search" type="button">Start Saving!</button>
           </span>
-          <div class="clearfix"></div>
         </div>
       </div>
     </form>
   </div> <!-- /#form -->
 
   <div class="filter-tools">
-
-    <form name="groupByForm">
-      <label for="groupByForm">Group Products By</label> <br/>
-      <input type="radio" ng-model="grouping" value="store"> Store <br/>
-      <input type="radio" ng-model="grouping" value="upc"> Universal Product Code <br/>
-      <input type="radio" ng-model="grouping" value="NULL"> Do Not Group <br/>
-    </form>
-
-    <form name="orderByForm">
-      <label for="orderByForm">Order Products in Group By</label> <br/>
-      <input type="radio" ng-model="ordering" ng-value="price"> Price <br/>
-      <input type="radio" ng-model="ordering" ng-value="name"> Product Name <br/>
-      <input type="radio" ng-model="ordering" ng-value="store"> Store <br/>
-    </form>
-
-    <input type="text" ng-model="search">
-
+    <div>
+      <h4>Group Results By</h4>
+      <form name="groupByForm">
+        <div>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="radio" ng-model="grouping" value="store">
+            </span>
+            <span class="input-group-addon form-control">Store</span>
+          </div>
+        </div>
+        <div>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="radio" ng-model="grouping" value="upc">
+            </span>
+            <span class="input-group-addon form-control">UPC</span>
+          </div>
+        </div>
+        <div>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="radio" ng-model="grouping" value="NULL">
+            </span>
+            <span class="input-group-addon form-control">Do not group</span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div>
+      <h4>Order Results By</h4>
+      <form name="orderByForm">
+        <div>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="radio" ng-model="ordering" ng-value="price">
+            </span>
+            <span class="input-group-addon form-control">Price</span>
+          </div>
+        </div>
+        <div>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="radio" ng-model="ordering" ng-value="name">
+            </span>
+            <span class="input-group-addon form-control">Product Name</span>
+          </div>
+        </div>
+        <div>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="radio" ng-model="ordering" ng-value="store">
+            </span>
+            <span class="input-group-addon form-control">Store</span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div>
+      <h4>Filter Results</h4>
+      <form>
+        <input type="text" class="form-control" placeholder="Search for" ng-model="search">
+      </form>
+    </div>
   </div>
 
   <div class="resultTable" ng-show="items">

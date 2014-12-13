@@ -27,6 +27,35 @@ div.container {
 
   }
 
+  .filter-tools {
+
+    margin-bottom:1em;
+
+    .make-row();
+
+      > div {
+
+        margin-top:1em;
+
+        @media (min-width: @screen-sm-min) {
+          margin-top:0;
+        }
+
+        &:first-child {
+          margin-top:0;
+        }
+
+        .make-xs-column(12);
+        .make-sm-column(4);
+
+        .input-group-addon {
+        text-align:left;
+        }
+
+      }
+
+  }
+
   .resultTable {
 
     .cols {
@@ -38,13 +67,16 @@ div.container {
         .make-xs-column(12);
         .make-sm-column(4);
 
+        font-weight:bold;
+
       }
 
       > div:nth-child(2) {
 
         .make-xs-column(6);
         .make-sm-column(4);
-        text-align:center;
+        text-align:left;
+        font-size:120%;
 
       }
 
@@ -52,7 +84,12 @@ div.container {
 
         .make-xs-column(6);
         .make-sm-column(4);
-        text-align:center;
+        text-align:left;
+
+        @media (min-width: @screen-sm-min) {
+
+          text-align:center;
+        }
 
       }
 
@@ -62,7 +99,11 @@ div.container {
 
         .make-xs-column(12);
         .make-sm-column(3);
-        text-align:center;
+        text-align:left;
+
+        @media (min-width: @screen-sm-min) {
+          text-align:center;
+        }
 
       }
 
