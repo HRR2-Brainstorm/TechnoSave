@@ -8,9 +8,8 @@
     <meta name="author" content="">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:500,600,400,300' rel='stylesheet' type='text/css'>
-    
-    <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
-    <link rel='stylesheet' href='stylesheets/style.css' />
+
+    <link rel='stylesheet' href='stylesheets/styles.css' />
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -27,18 +26,13 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="/#/">Techno$ave</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/sign-up">Create Account</a></li>
-            <li><a href="/sign-in">Sign In </a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
-      <div ui-view></div>
+      <div>
+        <div ui-view></div>
+      </div>
     </div>
-  <script src="javascripts/application.js"></script>
   </body>
 </html>

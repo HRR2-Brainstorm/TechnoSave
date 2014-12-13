@@ -10,63 +10,46 @@
   <!-- alert -->
 
   <div id="form">
-    <form role="form" ng-submit="addItem()">
-      <div class="col-md-12">
-        <div class="error alert-danger"></div>
-        <div class="input-group input-group-lg">
-          <input type="text" class="form-control" placeholder="Search" ng-model="inputModel">
-          <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary search">Start Saving!</button>
-          </span>
-          <div class="clearfix"></div>
-        </div>
-      </div>
-    </form>
-  </div> <!-- /#form -->
-
-  <div class="filter-tools">
-
-    <form name="groupByForm">
-      <label for="groupByForm">Group Products By</label> <br/>
-      <input type="radio" ng-model="grouping" value="store"> Store <br/>
-      <input type="radio" ng-model="grouping" value="upc"> Universal Product Code <br/>
-      <input type="radio" ng-model="grouping" value="NULL"> Do Not Group <br/>
-    </form>
-
-    <form name="orderByForm">
-      <label for="orderByForm">Order Products in Group By</label> <br/>
-      <input type="radio" ng-model="ordering" ng-value="price"> Price <br/>
-      <input type="radio" ng-model="ordering" ng-value="name"> Product Name <br/>
-      <input type="radio" ng-model="ordering" ng-value="store"> Store <br/>
-    </form>
-
-    <input type="text" ng-model="search">
-
-  </div>
-
-  <div class="resultTable">
-    <div class="table table-hover resultTable" ng-show="items">
-      <div>
-        <div>
-          <div>Item</div>
-          <div>Price</div>
-          <div>Store</div>
-        </div>
-      </div>
-      <div>
-        <div style="border: 1px solid black;" ng-repeat="(key, value) in items | groupBy: grouping | filterGroups: search | arrayify | orderBy:arrayifyKey" id="list">
-          <div ng-repeat="item in value | orderBy: ordering">
-            <a ng-href="{{ item.productUrl }}" target="_blank">
-              <div><button class="btn btn-success cartBtn" ng-click="getItemId(item.name, item.price, item.store)">Add To Summary</button></div>
-              <div>{{item.name}}</div>
-              <div>{{item.price | currency:"$"}}</div>
-              <div>{{item.store}}</div>
-            </a>
+      <form role="form" ng-submit="addItem()">
+        <div class="col-md-12">
+          <div class="error alert-danger"></div>
+          <div class="input-group input-group-lg">
+            <input type="text" class="form-control" placeholder="Search" ng-model="inputModel">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary">Start Saving!</button>
+            </span>
+            <div class="clearfix"></div>
           </div>
         </div>
       </div>
+    </form>
+      </form>
+  </div> <!-- /#form -->
+
+    <!-- Listing results back from the API -->
+  <div class="resultTable" ng-show="items">
+    <div>
+      <div>Item</div>
+      <div>Price</div>
+      <div>Store</div>
+      <div></div>
     </div>
-  </div> <!-- /.resultTable -->
+    <div ng-repeat="item in items" id="list">
+      <div>
+        {{item.name}}
+      </div>
+      <div>
+        {{item.price | currency:"$"}}
+      </div>
+      <div>
+        {{item.store}}
+      </div>
+      <div>
+        <button class="btn btn-success cartBtn" ng-click="getItemId(item.name, item.price, item.store)">Add To Summary</button>
+      </div>
+    </div>
+  </div>
+  <!-- /.resultTable -->
 
   <!---Summary Table-->
     <div class="summaryTable" ng-show="cart">

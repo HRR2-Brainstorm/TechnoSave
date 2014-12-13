@@ -1,0 +1,103 @@
+@import "../../bower_components/bootstrap/less/bootstrap.less";
+
+body {
+  background-color:@body-bg;
+  padding-top:@navbar-height + 30;
+}
+
+div.container {
+
+  > div {
+
+    .make-row();
+
+    > div {
+
+      .make-sm-column(12);
+
+    }
+
+  }
+
+  #form {
+
+    .make-row();
+
+    margin-bottom:2em;
+
+  }
+
+  .resultTable {
+
+    > div {
+
+      > div:first-child {
+
+        .make-xs-column(12);
+        .make-sm-column(4);
+
+      }
+
+      > div:nth-child(2) {
+
+        .make-xs-column(6);
+        .make-sm-column(4);
+        text-align:center;
+
+      }
+
+      > div:nth-child(3) {
+
+        .make-xs-column(6);
+        .make-sm-column(4);
+        text-align:center;
+
+      }
+
+      > div:nth-child(4) {
+
+        display: none;
+
+        .make-xs-column(12);
+        .make-sm-column(3);
+        text-align:center;
+
+      }
+
+    }
+
+    > div:first-child {
+
+      display: none;
+      .make-row();
+
+      font-weight:bold;
+      font-size:120%;
+
+      @media (min-width: @screen-sm-min) {
+
+        display:block;
+
+      }
+
+    }
+
+    > div:not(:first-child) {
+
+      &:nth-child(odd) {
+        background-color:#f2f2f2;
+      }
+
+      .make-row();
+      margin-bottom:1em;
+      padding:0.8em 0;
+
+      button {
+        .center-block();
+      }
+
+    }
+
+  }
+
+}
