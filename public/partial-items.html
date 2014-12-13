@@ -23,30 +23,9 @@
         </div>
       </div>
     </form>
+      </form>
   </div> <!-- /#form -->
 
-  <div class="filter-tools">
-
-    <form name="groupByForm">
-      <label for="groupByForm">Group Products By</label> <br/>
-      <input type="radio" ng-model="grouping" value="store"> Store <br/>
-      <input type="radio" ng-model="grouping" value="upc"> Universal Product Code <br/>
-      <input type="radio" ng-model="grouping" value="NULL"> Do Not Group <br/>
-    </form>
-
-    <form name="orderByForm">
-      <label for="orderByForm">Order Products in Group By</label> <br/>
-      <input type="radio" ng-model="ordering" ng-value="price"> Price <br/>
-      <input type="radio" ng-model="ordering" ng-value="name"> Product Name <br/>
-      <input type="radio" ng-model="ordering" ng-value="store"> Store <br/>
-    </form>
-
-    <input type="text" ng-model="search">
-
-  </div>
-
-  <div class="resultTable">
-    <div class="table table-hover resultTable" ng-show="items">
     <!-- Listing results back from the API -->
   <div class="resultTable" ng-show="items">
     <div>
