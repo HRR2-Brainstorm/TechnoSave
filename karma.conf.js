@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['mocha', 'chai'],
 
 
     // list of files / patterns to load in the browser
@@ -19,8 +19,12 @@ module.exports = function(config) {
       'public/bower_components/angular/angular.js',
       'public/bower_components/angular-mocks/angular-mocks.js',
       'public/bower_components/angular-ui-router/release/angular-ui-router.js',
-      // test files
-      'test/spec/*Specs.js'
+
+      //app code
+      'public/lib/*.js',
+
+      //test files
+      'test/spec/*Specs.js',
     ],
 
 
@@ -56,7 +60,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // start these browsers
@@ -66,6 +70,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    singleRun: false
   });
 };
