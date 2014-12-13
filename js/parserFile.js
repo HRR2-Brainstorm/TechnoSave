@@ -1,5 +1,6 @@
 var Promise = require('bluebird');
 var api = require('./api-helper');
+var amazonAPI = require('./api-amazon');
 
 var walmart = {
   name: 'Walmart',
