@@ -1,5 +1,8 @@
-var util = require('util');
+'use strict';
+
+var Promise = require('bluebird');
 var OperationHelper = require('apac').OperationHelper;
+Promise.promisifyAll(OperationHelper.prototype);
 
 var opHelper = new OperationHelper({
       awsId: 'AKIAJSQYXFG2KXKSQNLA', assocId: 'technosave-20',
@@ -13,25 +16,32 @@ var opHelper = new OperationHelper({
 // err = potential errors raised from xml2js.parseString() or http.request().
 // parsed = xml2js parsed response. raw = raw xml response.
 
-module.exports = function(keywords) {
-  var products = {};
+module.exports = function(searchQuery) {
+  var products = [];
+  var product;
 
-  opHelper.execute('ItemSearch', {
+  return opHelper.executeAsync('ItemSearch', {
     'SearchIndex': 'Electronics',
-    'Keywords': keywords,
+    'Keywords': searchQuery,
     'ResponseGroup': 'ItemAttributes, Offers'
-  }, function(err, results) {
-      var items = results.ItemSearchResponse.Items[0]['Item'];
-      if(items) {
-        for(var i = 0; i < items.length; i++) {
-          products.store = 'Amazon',
-          products.price = items[i].OfferSummary[0].LowestNewPrice[0].FormattedPrice + '',
-          products.upc = items[i].ItemAttributes[0].UPC + '',
-          products.name = items[i].ItemAttributes[0].Title + '',
-          products.productUrl = 'http://www.amazon.com/gp/product/' + items[i].ASIN
+  }).then(function(results) {
+      if(results[0].ItemSearchResponse) {
+        var items = results[0].ItemSearchResponse.Items[0].Item;
+        if(items) {
+          for(var i = 0; i < items.length; i++) {
+            product = {};
+            product.store = 'Amazon';
+            product.price = parseFloat(items[i].OfferSummary[0].LowestNewPrice[0].Amount) / 100;
+            product.upc = items[i].ItemAttributes[0].UPC + '';
+            product.name = items[i].ItemAttributes[0].Title + '';
+            product.productUrl = 'http://www.amazon.com/gp/product/' + items[i].ASIN;
+            products.push(product);
+          }
+          return products;
         }
       }
+  }).catch(function(err) {
+    console.log(err);
   });
 
-  return products;
 };
