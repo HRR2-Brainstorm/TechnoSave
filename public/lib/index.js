@@ -80,31 +80,6 @@ angular.module('App', ['ui.router'])
     $scope.calculateSum();
   };
 
-  //*****  Compare Table ******//
-  var diff;
-  $scope.moveToCompare = function(name, price, store) {
-    animateSummary();
-    $scope.compare =  $scope.compare || [];
-    var item = {
-                  name: name,
-                  price: price,
-                  store: store
-                }
-    if ($scope.compare.length < 2) {
-      $scope.compare.push(item);
-    }
-
-    if ($scope.compare.length === 2) {
-      diff = Math.abs($scope.compare[0].price - $scope.compare[1].price);
-      $scope.diff = diff;
-    }
-  };
-  // clear the compare list
-  $scope.clear = function() {
-    $scope.compare = [];
-    $scope.diff = [];
-  };
-
   // order by after grouping by upc
   $scope.price = ['price', 'name', 'store'];
   $scope.name = ['name', 'price', 'store'];
