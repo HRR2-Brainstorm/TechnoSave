@@ -19,6 +19,20 @@ angular.module('App', ['ui.router'])
     $urlRouterProvider.otherwise('/');
 })
 
+//*****  list-item directive ******//
+.directive('listItem', function () {
+
+  return {
+    restrict: 'E',
+    scope: {
+      item: '=item'
+    },
+    replace: true,
+    templateUrl: 'list-item.html'
+  };
+
+})
+
 //*****  ItemList controller ******//
 .controller('ItemListCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
@@ -58,13 +72,8 @@ angular.module('App', ['ui.router'])
   };
 
   //*****  Summary Table ******//
-  $scope.getItemId = function (name, price, store) {
+  $scope.getItemId = function (item) {
     $scope.cart = $scope.cart || [];
-    var item = {
-                  name: name,
-                  price: price,
-                  store: store
-                }
     $scope.cart.push(item);
     $scope.calculateSum();
   };
