@@ -10,10 +10,6 @@ angular.module('App', ['ui.router'])
     .state('home', {
       url: '/',
       templateUrl: 'partial-items.html'
-    })
-    .state('map', {
-      url: '/map',
-      templateUrl: 'map.html'
     });
     // default router
     $urlRouterProvider.otherwise('/');
@@ -35,14 +31,6 @@ angular.module('App', ['ui.router'])
 
 //*****  ItemList controller ******//
 .controller('ItemListCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
-
-  var animateSummary = function(){
-    $('.summaryTable').animate({
-      marginRight: "60%",
-      width: '50%'
-      }, 1000 );
-  };
-  //*****  end of animation ******//
 
   //*****  post and get from API ******//
   $scope.addItem = function() {
@@ -78,45 +66,16 @@ angular.module('App', ['ui.router'])
     $scope.calculateSum();
   };
 
-  //they clicked the map button in shopping list
-  $scope.map = function(){
-    $location.path("/map");
-  };
   // clear one item at a time
   $scope.clearItem = function(index){
     $scope.cart.splice(index, 1);
     $scope.calculateSum();
   };
 
-  //*****  Compare Table ******//
-  var diff;
-  $scope.moveToCompare = function(name, price, store) {
-    animateSummary();
-    $scope.compare =  $scope.compare || [];
-    var item = {
-                  name: name,
-                  price: price,
-                  store: store
-                }
-    if ($scope.compare.length < 2) {
-      $scope.compare.push(item);
-    }
-
-    if ($scope.compare.length === 2) {
-      diff = Math.abs($scope.compare[0].price - $scope.compare[1].price);
-      $scope.diff = diff;
-    }
-  };
-  // clear the compare list
-  $scope.clear = function() {
-    $scope.compare = [];
-    $scope.diff = [];
-  };
-
   // order by after grouping by upc
   $scope.price = ['price', 'name', 'store'];
   $scope.name = ['name', 'price', 'store'];
-  $scope.sotre = ['store', 'name', 'price'];
+  $scope.store = ['store', 'name', 'price'];
   $scope.ordering = $scope.price;
   $scope.grouping = 'upc';
 
@@ -237,14 +196,3 @@ angular.module('App', ['ui.router'])
   };
 
 })
-
-//*****  Map Controller ******//
-.controller('MapCtrl', ['$scope', '$http', function ($scope, $http) {
-  //get location data, start render cascade
-  var map;
-  var infowindow;
-  //map all electronics stores with keyword "Best Buy"
-  geoMap("Best Buy", ['electronics_store']);
-  //map all electronics stores with keyword "Walmart"
-  geoMap("Walmart", ['electronics_store']);
-}]);
