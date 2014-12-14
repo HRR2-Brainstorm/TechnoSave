@@ -10,10 +10,6 @@ angular.module('App', ['ui.router'])
     .state('home', {
       url: '/',
       templateUrl: 'partial-items.html'
-    })
-    .state('map', {
-      url: '/map',
-      templateUrl: 'map.html'
     });
     // default router
     $urlRouterProvider.otherwise('/');
@@ -78,10 +74,6 @@ angular.module('App', ['ui.router'])
     $scope.calculateSum();
   };
 
-  //they clicked the map button in shopping list
-  $scope.map = function(){
-    $location.path("/map");
-  };
   // clear one item at a time
   $scope.clearItem = function(index){
     $scope.cart.splice(index, 1);
@@ -237,14 +229,3 @@ angular.module('App', ['ui.router'])
   };
 
 })
-
-//*****  Map Controller ******//
-.controller('MapCtrl', ['$scope', '$http', function ($scope, $http) {
-  //get location data, start render cascade
-  var map;
-  var infowindow;
-  //map all electronics stores with keyword "Best Buy"
-  geoMap("Best Buy", ['electronics_store']);
-  //map all electronics stores with keyword "Walmart"
-  geoMap("Walmart", ['electronics_store']);
-}]);
