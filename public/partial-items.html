@@ -97,15 +97,11 @@
       <div>Store</div>
     </div>
     <div ng-repeat="(key, value) in items | groupBy: grouping | filterGroups: search | arrayify | orderBy:arrayifyKey">
-        <div ng-repeat="item in value | orderBy: ordering">
-          <div><button class="btn btn-success cartBtn" ng-click="getItemId(item.name, item.price, item.store)">Add To Shortlist</button></div>
-          <a ng-href="{{ item.productUrl }}" target="_blank" class="cols">
-            <div>{{item.name}}</div>
-            <div>{{item.price | currency:"$"}}</div>
-            <div>{{item.store}}</div>
-          </a>
-        </div>
+      <div ng-repeat="item in value | orderBy: ordering">
+        <div><button class="btn btn-success cartBtn" ng-click="getItemId(item)">Add To Shortlist</button></div>
+        <list-item item="item"></list-item>
       </div>
+    </div>
   </div><!-- /.resultTable -->
 
   <!---Summary Table-->
@@ -122,9 +118,7 @@
         </div>
         <div>
           <div ng-repeat="item in cart">
-            <div>{{item.name | limitTo: 50}}...</a></div>
-            <div>{{item.price | currency:"$"}}</div>
-            <div>{{item.store}}</div>
+            <list-item item="item"></list-item>
             <div><button class="btn btn-danger" id="remove" ng-click="clearItem($index)" ng-show="cart">Remove</button></div>
           </div>
           <div>Total: {{ total | currency:"$"}}</div>
