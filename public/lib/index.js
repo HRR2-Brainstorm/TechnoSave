@@ -32,14 +32,6 @@ angular.module('App', ['ui.router'])
 //*****  ItemList controller ******//
 .controller('ItemListCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
-  var animateSummary = function(){
-    $('.summaryTable').animate({
-      marginRight: "60%",
-      width: '50%'
-      }, 1000 );
-  };
-  //*****  end of animation ******//
-
   //*****  post and get from API ******//
   $scope.addItem = function() {
     $http.post('/', {items: $scope.inputModel})
