@@ -14,7 +14,9 @@ module.exports = function(req, res) {
   Promise.all(apiCalls).then(function(allOutputs) {
     var result = [];
     for (var i = 0; i < allOutputs.length; i++){
-      result = result.concat(allOutputs[i]);
+      if(allOutputs[i] !== undefined) {
+        result = result.concat(allOutputs[i]);
+      }
     }
     res.send(result);
   });
