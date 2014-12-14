@@ -12,7 +12,6 @@ module.exports = function(req, res) {
   ];
 
   Promise.all(apiCalls).then(function(allOutputs) {
-    console.log('products ->>>>>', allOutputs);
     var result = [];
     for (var i = 0; i < allOutputs.length; i++){
       if(allOutputs[i] !== undefined) {
