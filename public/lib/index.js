@@ -75,7 +75,7 @@ angular.module('App', ['ui.router'])
   // order by after grouping by upc
   $scope.price = ['price', 'name', 'store'];
   $scope.name = ['name', 'price', 'store'];
-  $scope.sotre = ['store', 'name', 'price'];
+  $scope.store = ['store', 'name', 'price'];
   $scope.ordering = $scope.price;
   $scope.grouping = 'upc';
 
