@@ -7,6 +7,7 @@ var stores = {};
 stores.walmart = {
   name: 'Walmart',
   makeUrl: function(item) {
+    // this works for keyword as well as UPC
     return 'http://api.walmartlabs.com/v1/search' + '?apiKey=4z8pkk2ycuvewyydr4mf3ha5&query=' + item;
   },
   parser: 'items',
@@ -15,17 +16,19 @@ stores.walmart = {
 
 stores.bestbuy = {
   name: 'Best Buy',
-  makeUrl: function(item) {
-    return 'http://api.remix.bestbuy.com/v1/products' + '(name=' + item + '*)?show=name,salePrice,upc,mobileUrl&format=json' + '&apiKey=3fywvy298naxeed665ex82z5';
+  makeUrl: function(item, type) {
+    // default type is 'name'
+    type = type || 'name';
+    return 'http://api.remix.bestbuy.com/v1/products(' + type + '=' + item + '*)?show=name,salePrice,upc,mobileUrl&format=json&apiKey=3fywvy298naxeed665ex82z5';
   },
   parser: 'products',
   productUrl: 'mobileUrl'
 };
 
-module.exports = function(searchQuery, storeName) {
+module.exports = function(searchQuery, storeName, type) {
   var store = stores[storeName];
 
-  return request(store.makeUrl(searchQuery))
+  return request(store.makeUrl(searchQuery, type))
     //async callback to parse data
     .then(function(data){
       var apiItemsList = [];

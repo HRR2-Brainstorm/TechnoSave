@@ -4,11 +4,12 @@ var wmBB = require('./api-walmartBB');
 
 module.exports = function(req, res) {
   var searchQuery = req.body.items;
+  var type = req.body.type;
 
   var apiCalls = [
-    amazon(searchQuery),
+    amazon(searchQuery, type),
     wmBB(searchQuery, 'walmart'),
-    wmBB(searchQuery, 'bestbuy')
+    wmBB(searchQuery, 'bestbuy', type)
   ];
 
   Promise.all(apiCalls).then(function(allOutputs) {
