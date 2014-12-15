@@ -197,12 +197,14 @@ div.container {
 div.summaryTable {
 
   position: fixed;
-  top: 60px;
+  bottom: 0px;
   right: 0px;
   background: white;
   box-sizing: border-box;
   border: 1px solid black;
   z-index: 5;
+  min-height: 35px;
+  left: 0;
 
 }
 
@@ -211,5 +213,30 @@ div.summaryTable {
   position: absolute;
   right: 0px;
   top: 0px;
+  left: 0px;
+  width: 100%;
 
 }
+
+.cartTable {
+
+  margin: 50px 10px 20px;
+
+}
+
+.cartItem {
+
+  position: relative;
+  margin-bottom: 10px;
+
+}
+
+.removeFromCart {
+
+  position: absolute;
+  right: 17px;
+  bottom: 1px;
+  z-index: 5;
+
+}
+
