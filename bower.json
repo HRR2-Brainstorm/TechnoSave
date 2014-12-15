@@ -5,7 +5,11 @@
   "authors": [
     "Phil Elauria <phil.elauria@gmail.com>",
     "Dave Mun <mun.dave@gmail.com>",
-    "Essam Al Joubori <essam.joubori@gmail.com>"
+    "Essam Al Joubori <essam.joubori@gmail.com>",
+    "Brett DeWoody <brettdewoody@gmail.com>",
+    "Dmitri Rabinowitz <dmitrirabinowitz+code@gmail.com>",
+    "Gunnari Auvinen <gauvinen@gmail.com",
+    "Jason Deppen <jdeppen@gmail.com>"
   ],
   "license": "MIT",
   "ignore": [
@@ -15,6 +19,9 @@
     "test",
     "tests"
   ],
+  "devDependencies": {
+    "angular-mocks": "~1.3.4"
+  },
   "dependencies": {
     "angular-ui-router": "~0.2.13",
     "angular": "~1.3.5",
