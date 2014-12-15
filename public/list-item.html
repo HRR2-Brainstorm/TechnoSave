@@ -3,6 +3,6 @@
   <a ng-href="{{ item.productUrl }}" target="_blank" class="cols">
     <div>{{item.name}}</div>
     <div>{{item.price | currency:"$"}}</div>
-    <div>{{item.store}}</div>
+    <div><img ng-src="icons/{{item.store}}.png"></div>
   </a>
 </div>
