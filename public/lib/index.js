@@ -88,8 +88,12 @@ angular.module('App', ['ui.router'])
   // clear one item at a time
   $scope.clearItem = function(index){
     $scope.cart.splice(index, 1);
-    //remove item from localStorage
-    window.localStorage.cart = JSON.stringify($scope.cart);
+    //remove item from localStorage, if cart is empty clear storage
+    if ($scope.cart.length){
+      window.localStorage.cart = JSON.stringify($scope.cart);
+    } else {
+      delete window.localStorage.cart;
+    }
     $scope.calculateSum();
   };
 
