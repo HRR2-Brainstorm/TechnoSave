@@ -29,8 +29,10 @@ module.exports = function(searchQuery) {
         var items = results[0].ItemSearchResponse.Items[0].Item;
         if(items) {
           for(var i = 0; i < items.length; i++) {
-            var availablePrice = items[i].OfferSummary[0]; //base for price data
-            availablePrice = availablePrice.LowestNewPrice || availablePrice.LowestUsedPrice; //used if !new
+            //base object for price data
+            var availablePrice = items[i].OfferSummary[0];
+            //fall back to used price when there is no new product available
+            availablePrice = availablePrice.LowestNewPrice || availablePrice.LowestUsedPrice;
 
             product = {};
             product.store = 'Amazon';
