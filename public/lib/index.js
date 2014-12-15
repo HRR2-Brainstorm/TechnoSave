@@ -37,7 +37,9 @@ angular.module('App', ['ui.router'])
 
   //*****  post and get from API ******//
   $scope.addItem = function(type, searchQuery) {
+    $scope.loading = true;
     searchQuery = type ? searchQuery : $scope.inputModel;
+    $scope.items = null;
     $http.post('/', {items: searchQuery, type: type})
       .success(function(data){
         if(data.length === 0){
@@ -47,6 +49,7 @@ angular.module('App', ['ui.router'])
         }else{
           $scope.empty = false;
         }
+        $scope.loading = false;
         $scope.items = [];
         // hide/show UPC button
         $scope.upcSearch = !!type;

@@ -88,13 +88,17 @@
     <div>
       <h4>Filter Results</h4>
       <form>
-        <!-- filter groups -->
-        <input type="text" class="form-control" placeholder="Search for" ng-model="search">
+        <input type="text" class="form-control" placeholder="Filter results" ng-model="search">
       </form>
     </div>
   </div>
 
   <!-- Result Table -->
+  <div class="spinner" ng-show="loading">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+  </div>
   <div class="resultTable" ng-show="items">
     <div class="cols">
       <div>Item</div>
