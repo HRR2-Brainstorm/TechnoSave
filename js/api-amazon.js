@@ -16,17 +16,31 @@ var opHelper = new OperationHelper({
 // err = potential errors raised from xml2js.parseString() or http.request().
 // parsed = xml2js parsed response. raw = raw xml response.
 
-module.exports = function(searchQuery) {
+module.exports = function(searchQuery, type) {
+  // default params for all searches
+  var params = {
+    ResponseGroup: 'ItemAttributes, Offers'
+  };
+
+  if(type === 'UPC') {
+    type = 'ItemLookup';
+    params.SearchIndex = 'All';
+    params.IdType = 'UPC';
+    params.ItemId = searchQuery;
+  } else {
+    type = 'ItemSearch';
+    params.SearchIndex = 'Electronics';
+    params.Keywords = searchQuery;
+  }
+
   var products = [];
   var product;
 
-  return opHelper.executeAsync('ItemSearch', {
-    'SearchIndex': 'Electronics',
-    'Keywords': searchQuery,
-    'ResponseGroup': 'ItemAttributes, Offers'
-  }).then(function(results) {
-      if(results[0].ItemSearchResponse) {
-        var items = results[0].ItemSearchResponse.Items[0].Item;
+  return opHelper.executeAsync(type, params)
+    .then(function(results) {
+      results = results[0][type + 'Response']
+      if(results) {
+        var items = results.Items[0].Item;
         if(items) {
           for(var i = 0; i < items.length; i++) {
             //base object for price data

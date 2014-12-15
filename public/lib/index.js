@@ -36,8 +36,8 @@ angular.module('App', ['ui.router'])
 .controller('ItemListCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
   //*****  post and get from API ******//
-  $scope.addItem = function() {
-    $http.post('/', {items: $scope.inputModel})
+  $scope.addItem = function(type) {
+    $http.post('/', {items: $scope.inputModel, type: type})
       .success(function(data){
         if(data.length === 0){
           $scope.empty = true;
@@ -47,6 +47,8 @@ angular.module('App', ['ui.router'])
           $scope.empty = false;
         }
         $scope.items = [];
+        // hide/show UPC button
+        $scope.upcSearch = !!type;
         data.forEach(function(item){
           $scope.items.push(item);
         });
