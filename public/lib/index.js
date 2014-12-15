@@ -63,10 +63,21 @@ angular.module('App', ['ui.router'])
   };
 
   //*****  Summary Table ******//
+
+  //load from local storage if cart is defined
+  var cartStr = window.localStorage.cart;
+  if (cartStr) {
+    //must parse the local storage since only strings can be stored
+    $scope.cart = JSON.parse(cartStr);
+    $scope.calculateSum();
+  }
+
   $scope.getItemId = function (item) {
     $scope.cart = $scope.cart || [];
-    //push item object into cart
+    //push item into cart
     $scope.cart.push(item);
+    //add item to localStorage
+    window.localStorage.cart = JSON.stringify($scope.cart);
     //calculate sum of product prices
     $scope.calculateSum();
   };
@@ -194,7 +205,7 @@ angular.module('App', ['ui.router'])
 
 }])
 
-//convert an object in an array with each element possessing a key corresponding to its matching key when it was part of an object
+//convert an object into an array with each element possessing a key corresponding to its matching key when it was part of an object
 .filter('arrayify', function () {
 
   //memoize result
