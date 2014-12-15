@@ -13,15 +13,14 @@ describe('ItemListCtrl', function () {
     $httpBackend = $injector.get('$httpBackend');
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
-
     $controller = $injector.get('$controller');
 
+    // create mock items
     mockItem1 = {
       name: 'Playstation',
       price: 399,
       store: 'Wal-Mart'
     };
-
     mockItem2 = {
       name: 'Xbox',
       price: 349,
@@ -35,14 +34,12 @@ describe('ItemListCtrl', function () {
     };
   }));
 
-  it('should have addItem, calculateSum, getItemId, map, clearItem, moveToCompare, clear, and arrayifyKey functions', function () {
+  it('should have addItem, calculateSum, getItemId, clearItem, and arrayifyKey functions', function () {
     createController();
     expect($scope.addItem).to.be.a('function');
+    expect($scope.calculateSum).to.be.a('function');
     expect($scope.getItemId).to.be.a('function');
-    expect($scope.map).to.be.a('function');
     expect($scope.clearItem).to.be.a('function');
-    expect($scope.moveToCompare).to.be.a('function');
-    expect($scope.clear).to.be.a('function');
     expect($scope.arrayifyKey).to.be.a('function');
   });
 
@@ -87,10 +84,4 @@ describe('ItemListCtrl', function () {
     expect($scope.items).to.be.undefined();
   });
 
-  it('should change the path after calling map()', function () {
-    createController();
-    expect($location.path()).to.be.equal('/');
-    $scope.map();
-    expect($location.path()).to.be.equal('/map');
-  });
 });
