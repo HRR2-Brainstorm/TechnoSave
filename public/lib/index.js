@@ -36,8 +36,9 @@ angular.module('App', ['ui.router'])
 .controller('ItemListCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
   //*****  post and get from API ******//
-  $scope.addItem = function(type) {
-    $http.post('/', {items: $scope.inputModel, type: type})
+  $scope.addItem = function(type, searchQuery) {
+    searchQuery = type ? searchQuery : $scope.inputModel;
+    $http.post('/', {items: searchQuery, type: type})
       .success(function(data){
         if(data.length === 0){
           $scope.empty = true;

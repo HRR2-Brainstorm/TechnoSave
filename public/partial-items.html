@@ -107,7 +107,7 @@
       <div ng-repeat="item in value | orderBy: ordering">
         <div>
           <button class="btn btn-success cartBtn" ng-click="getItemId(item)">Add To Shortlist</button>
-          <button class="btn btn-success upcBtn" ng-hide='upcSearch' ng-click="addItem('UPC')">Price Check this Item</button>
+          <button class="btn btn-success upcBtn" ng-hide='upcSearch' ng-click="addItem('UPC', item.upc)">Price Check this Item</button>
         </div>
         <list-item item="item"></list-item>
       </div>
