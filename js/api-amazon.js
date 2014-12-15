@@ -29,9 +29,12 @@ module.exports = function(searchQuery) {
         var items = results[0].ItemSearchResponse.Items[0].Item;
         if(items) {
           for(var i = 0; i < items.length; i++) {
+            var availablePrice = items[i].OfferSummary[0]; //base for price data
+            availablePrice = availablePrice.LowestNewPrice || availablePrice.LowestUsedPrice; //used if !new
+
             product = {};
             product.store = 'Amazon';
-            product.price = parseFloat(items[i].OfferSummary[0].LowestNewPrice[0].Amount) / 100;
+            product.price = parseFloat(availablePrice[0].Amount) / 100;
             product.upc = items[i].ItemAttributes[0].UPC + '';
             product.name = items[i].ItemAttributes[0].Title + '';
             product.productUrl = 'http://www.amazon.com/gp/product/' + items[i].ASIN;
