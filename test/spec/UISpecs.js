@@ -32,6 +32,9 @@ describe('ItemListCtrl', function () {
         $scope: $scope,
       });
     };
+
+    window.localStorage.clear();
+
   }));
 
   it('should have addItem, calculateSum, getItemId, clearItem, and arrayifyKey functions', function () {
@@ -62,6 +65,9 @@ describe('ItemListCtrl', function () {
 
     $scope.clearItem(0);
     expect($scope.total).to.be.equal(349);
+
+    $scope.clearItem(0);
+    expect($scope.total).to.be.equal(0);
   });
 
   it('should return items if search was successful', function () {

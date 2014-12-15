@@ -58,8 +58,8 @@ angular.module('App', ['ui.router'])
     var sum = 0;
     for (var i = 0; i < $scope.cart.length; i++) {
       sum += $scope.cart[i].price;
-      $scope.total = sum;
     }
+    $scope.total = sum;
   };
 
   //*****  Summary Table ******//
@@ -85,6 +85,8 @@ angular.module('App', ['ui.router'])
   // clear one item at a time
   $scope.clearItem = function(index){
     $scope.cart.splice(index, 1);
+    //remove item from localStorage
+    window.localStorage.cart = JSON.stringify($scope.cart);
     $scope.calculateSum();
   };
 
