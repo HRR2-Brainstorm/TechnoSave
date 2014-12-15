@@ -6,6 +6,8 @@ describe('Filters', function () {
   beforeEach(module('App'));
   beforeEach(inject( function ($injector) {
     $filter = $injector.get('$filter');
+
+    // create mock items and a mock input for testing filters
     mockItem1 = {
       name: 'Xbox',
       price: 349,
@@ -45,13 +47,6 @@ describe('Filters', function () {
   describe('groupBy', function () {
 
     it('should group stores by provided key', function () {
-      // can access the filters by the $filter('groupBy')(/* input arguments here */)
-      // another way to do this is the following it statement.
-      /*
-      it('should group stores by the provided key', inject( function (groupByFilter) {
-        expect(groupByFilter()).to.be.... etc
-      }))
-       */
       var mockResult = {
         'Amazon': [mockItem2, mockItem1],
         'Wal-Mart': [mockItem4, mockItem3],
@@ -100,8 +95,20 @@ describe('Filters', function () {
   });
 
   describe('arrayify', function () {
-    xit('should arrayify a collection', function () {
+
+    it('should convert an object into an arrayified version', function () {
+      var mockResult = [[mockItem2, mockItem1], [mockItem5, mockItem6], [mockItem4, mockItem3]];
+      mockResult[0].__arrayify__ = 'Amazon';
+      mockResult[1].__arrayify__ = 'Best Buy';
+      mockResult[2].__arrayify__ = 'Wal-Mart';
+
+      expect($filter('arrayify')(groupedItems)).to.eql(mockResult);
     });
+
+    it('should return the collection unchanged if already an array', function () {
+      expect($filter('arrayify')(mockInput)[0].__arrayify__).to.be.undefined();
+    });
+
   });
 
 });
