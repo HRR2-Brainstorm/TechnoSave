@@ -29,9 +29,14 @@ module.exports = function(searchQuery) {
         var items = results[0].ItemSearchResponse.Items[0].Item;
         if(items) {
           for(var i = 0; i < items.length; i++) {
+            //base object for price data
+            var availablePrice = items[i].OfferSummary[0];
+            //fall back to used price when there is no new product available
+            availablePrice = availablePrice.LowestNewPrice || availablePrice.LowestUsedPrice;
+
             product = {};
             product.store = 'Amazon';
-            product.price = parseFloat(items[i].OfferSummary[0].LowestNewPrice[0].Amount) / 100;
+            product.price = parseFloat(availablePrice[0].Amount) / 100;
             product.upc = items[i].ItemAttributes[0].UPC + '';
             product.name = items[i].ItemAttributes[0].Title + '';
             product.productUrl = 'http://www.amazon.com/gp/product/' + items[i].ASIN;
