@@ -23,6 +23,7 @@
     </form>
   </div> <!-- /#form -->
 
+  <!-- group results by user input -->
   <div class="filter-tools">
     <div>
       <h4>Group Results By</h4>
@@ -53,6 +54,8 @@
         </div>
       </form>
     </div>
+
+    <!-- order results by user input -->
     <div>
       <h4>Order Results By</h4>
       <form name="orderByForm">
@@ -85,6 +88,7 @@
     <div>
       <h4>Filter Results</h4>
       <form>
+        <!-- filter groups -->
         <input type="text" class="form-control" placeholder="Search for" ng-model="search">
       </form>
     </div>
@@ -97,7 +101,9 @@
       <div>Price</div>
       <div>Store</div>
     </div>
+    <!-- group items, filter groups, arrayify groups for filtering, order groups by key -->
     <div ng-repeat="(key, value) in items | groupBy: grouping | filterGroups: search | arrayify | orderBy:arrayifyKey">
+      <!-- order results in group-->
       <div ng-repeat="item in value | orderBy: ordering">
         <div><button class="btn btn-success cartBtn" ng-click="getItemId(item)">Add To Shortlist</button></div>
         <list-item item="item"></list-item>
@@ -106,25 +112,25 @@
   </div><!-- /.resultTable -->
 
   <!---Summary Table-->
-    <div class="summaryTable" ng-show="cart">
-      <button class="showSummaryTable" ng-click="showTable = !showTable">{{showTable ? 'Hide':'Show'}} Shortlist</button>
-      <div ng-if="showTable" class="table table-hover cartTable">
-        <p>Shortlist</p>
+  <div class="summaryTable" ng-show="cart">
+    <button class="showSummaryTable" ng-click="showTable = !showTable">{{showTable ? 'Hide':'Show'}} Shortlist</button>
+    <div ng-if="showTable" class="table table-hover cartTable">
+      <p>Shortlist</p>
+      <div>
         <div>
-          <div>
-            <div>Item</div>
-            <div>Price</div>
-            <div>Store</div>
-          </div>
-        </div>
-        <div>
-          <div ng-repeat="item in cart">
-            <list-item item="item"></list-item>
-            <div><button class="btn btn-danger" id="remove" ng-click="clearItem($index)" ng-show="cart">Remove</button></div>
-          </div>
-          <div>Total: {{ total | currency:"$"}}</div>
+          <div>Item</div>
+          <div>Price</div>
+          <div>Store</div>
         </div>
       </div>
+      <div>
+        <div ng-repeat="item in cart">
+          <list-item item="item"></list-item>
+          <div><button class="btn btn-danger" id="remove" ng-click="clearItem($index)" ng-show="cart">Remove</button></div>
+        </div>
+        <div>Total: {{ total | currency:"$"}}</div>
+      </div>
     </div>
+  </div>
 
 </div>
