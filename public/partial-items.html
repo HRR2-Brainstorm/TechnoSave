@@ -95,7 +95,11 @@
   </div>
 
   <!-- Result Table -->
-  <div class="loading" ng-show="loading">Loading</div>
+  <div class="spinner" ng-show="loading">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+  </div>
   <div class="resultTable" ng-show="items">
     <div class="cols">
       <div>Item</div>
