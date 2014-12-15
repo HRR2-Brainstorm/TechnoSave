@@ -15,7 +15,7 @@ stores.walmart = {
 };
 
 stores.bestbuy = {
-  name: 'Best Buy',
+  name: 'BestBuy',
   makeUrl: function(item, type) {
     // default type is 'name'
     type = type || 'name';
