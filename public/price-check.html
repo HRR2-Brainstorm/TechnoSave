@@ -1,0 +1,19 @@
+<div class="priceCheck">
+  <div class="spinner" ng-show="loading">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+  </div>
+  <div class="resultTable" ng-show="items">
+    <div class="cols">
+      <div><button class="btn btn-default" ui-sref="home">Go Back</button></div>
+      <div>Price Check</div>
+    </div>
+    <div ng-repeat="item in items | orderBy: 'price'">
+      <div>
+        <button class="btn btn-success cartBtn" ng-click="getItemId(item)">Add To Shortlist</button>
+      </div>
+      <list-item item="item"></list-item>
+    </div>
+  </div>
+</div>
