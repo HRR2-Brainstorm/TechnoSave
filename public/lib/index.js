@@ -2,17 +2,24 @@ angular.module('App', ['ui.router'])
 
 //*****  Route Config ******//
 .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
-  $locationProvider.html5Mode({
-    enabled: true,
-    requireBase: false
-  });
+
   $stateProvider
     .state('home', {
-      url: '/',
+      url: '/search',
       templateUrl: 'partial-items.html'
+    })
+    .state('home.check', {
+      abstract: true,
+      url: '/check',
+      template: '<div ui-view></div>'
+    })
+    .state('home.check.upc', {
+      url: '/:upc',
+      templateUrl: 'price-check.html',
+      controller: 'PriceCheckCtrl'
     });
     // default router
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/search');
 })
 
 //*****  list-item directive ******//
@@ -87,6 +94,10 @@ angular.module('App', ['ui.router'])
     //calculate sum of product prices
     $scope.calculateSum();
   };
+
+  $scope.$on('addToCart', function(e, item){
+    $scope.getItemId(item);
+  });
 
   // clear one item at a time
   $scope.clearItem = function(index){
@@ -173,6 +184,35 @@ angular.module('App', ['ui.router'])
   };
 
 })
+
+.controller('PriceCheckCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+  $scope.addItem = function(type, searchQuery) {
+    $scope.loading = true;
+    searchQuery = type ? searchQuery : $scope.inputModel;
+    $scope.items = null;
+    $http.post('/', {items: searchQuery, type: type})
+      .success(function(data){
+        if(data.length === 0){
+          $scope.empty = true;
+          $scope.items = undefined;
+          return;
+        }else{
+          $scope.empty = false;
+        }
+        $scope.loading = false;
+        $scope.items = [];
+        // hide/show UPC button
+        $scope.upcSearch = !!type;
+        data.forEach(function(item){
+          $scope.items.push(item);
+        });
+      });
+  };
+  $scope.addItem('UPC', $stateParams.upc);
+  $scope.getItemId = function(item){
+    $scope.$emit('addToCart', item);
+  };
+}])
 
 //filter each group in a groups object
 .filter('filterGroups', ['$filter', function ($filter) {
