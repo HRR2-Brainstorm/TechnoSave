@@ -5,8 +5,8 @@ var OperationHelper = require('apac').OperationHelper;
 Promise.promisifyAll(OperationHelper.prototype);
 
 var opHelper = new OperationHelper({
-      awsId: 'AKIAJSQYXFG2KXKSQNLA', assocId: 'technosave-20',
-      awsSecret: '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'
+      awsId: process.env.AMAZON_ID, assocId: process.env.AMAZON_ASSOC_ID,
+      awsSecret: process.env.AMAZON_SECRET
 });
 
 // execute(operation, params, callback)
