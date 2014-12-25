@@ -8,7 +8,7 @@ stores.walmart = {
   name: 'Walmart',
   makeUrl: function(item) {
     // this works for keyword as well as UPC
-    return 'http://api.walmartlabs.com/v1/search' + '?apiKey=4z8pkk2ycuvewyydr4mf3ha5&query=' + item;
+    return 'http://api.walmartlabs.com/v1/search' + '?apiKey=' + process.env.WALMART_KEY + '&query=' + item;
   },
   parser: 'items',
   productUrl: 'productUrl'
@@ -19,7 +19,7 @@ stores.bestbuy = {
   makeUrl: function(item, type) {
     // default type is 'name'
     type = type || 'name';
-    return 'http://api.remix.bestbuy.com/v1/products(' + type + '=' + item + '*)?show=name,salePrice,upc,mobileUrl&format=json&apiKey=3fywvy298naxeed665ex82z5';
+    return 'http://api.remix.bestbuy.com/v1/products(' + type + '=' + item + '*)?show=name,salePrice,upc,mobileUrl&format=json&apiKey=' + process.env.BESTBUY_KEY;
   },
   parser: 'products',
   productUrl: 'mobileUrl'
